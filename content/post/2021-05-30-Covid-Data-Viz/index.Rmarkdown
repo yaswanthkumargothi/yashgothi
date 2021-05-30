@@ -1,0 +1,145 @@
+---
+title: 'Covid Impact on Rennes Economy'
+author: 'Yaswanthkumar Gothireddy'
+date: '2021-05-30'
+slug: Covid Impact on Rennes Economy
+categories: []
+tags: ['Data Visualization','R','Open Data']
+subtitle: ''
+summary: 'Impact of Covid on Rennes City Businesses using Open Data'
+authors: []
+lastmod: '2021-05-30T12:00:00+02:00'
+featured: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+There are hidden gems everywhere in Open Source and Open Data. I found one while scouring for interesting Datasets for one of my projects. 
+
+The [French Open Data portal][1] assimilates all the open data generated in France from multiple municipalities, organizations, and individuals. One such interesting Dataset I found on this platform is from [Region Bretagne][2] about [Shops opened during confinement][3]. 
+
+The below depicts some insights in to Covid economy in the city.
+
+``` {r echo=FALSE,warning = FALSE,message= FALSE}
+sirene<-read.csv('sirene_bretagne.csv')
+cmrcouvrt<-read.csv('poi_osm_FR.csv')
+rennes<-sirene[sirene$codepostal==35000 |sirene$codepostal==35200 |sirene$codepostal==35700,]
+rennesovrt<-cmrcouvrt[cmrcouvrt$lat<=48.1441 & cmrcouvrt$lat>=48.0813 & cmrcouvrt$lon>=-1.7437 & cmrcouvrt$lon<=-1.6212,]
+
+```
+
+First, let us look at the businesses on the map
+
+``` {r echo= FALSE,warning = FALSE,message=FALSE}
+
+library(leaflet)
+
+m <- leaflet() %>% setView(lng = -1.6212, lat = 48.1441, zoom = 11.5)
+
+pal <- colorFactor(c("navy", "red", "green"," yellow"), domain = c("partial", "closed","open","open_adapted"))
+
+leaflet(rennesovrt) %>% addTiles()%>%addCircleMarkers(
+  radius = 3,
+  color = ~pal(status),
+  stroke = FALSE, fillOpacity = 0.5
+)%>%addLegend("bottomleft", colors=c("navy", "red", "green"," yellow","grey"),labels=c("partial", "closed","open","open_adapted","unknown"),
+              title = "Business Status",
+              opacity = 1
+)
+```
+
+### Insights
+
+The status of Businesses are tagged as closed, open, open_partial, partial, and unknown. The below plot depicts the distribution of business status by category in the city.
+
+```{r echo=FALSE,warning = FALSE,message=FALSE}
+library(dplyr)
+library(ggplot2)
+
+rennesovrt %>%
+  group_by(category,status)%>%
+  summarise(count=n())%>%ggplot(aes(x=category,y=count,fill=status))+geom_bar(stat="identity",color = "grey40", alpha = .5)+coord_flip()+
+  labs(title = "Distribution of Business status by Category in Rennes, FR",
+       subtitle = "The percent of amenity business closures are high",
+       caption = "Source: Data.gov.fr      25/11/2020      Yaswanthkumar.G")
+
+```
+
+From the plot, We could understand that most of the businesses status are unknown. This could be of the reason either the business has been closed or the owner has been unresponsive in the pandemic. But, some business categories outnumber others in closures such as amenity businesses. Let us delve into sub category level and find some extra information.
+
+```{r echo=FALSE,warning = FALSE,message = FALSE}
+library(treemapify)
+rennesovrt%>%
+  group_by(category,subcategory)%>%
+  summarise(count=n())%>%ggplot(aes(area = count,fill=category, label = subcategory,subgroup=category))+geom_treemap(color = "grey40", alpha = .5)+
+  geom_treemap_text(grow = T, reflow = T, colour = "black")+  geom_treemap_subgroup_border(colour = "black", size = 1)+
+  labs(title = "Business distribution by Category in Rennes, FR",
+       subtitle = "Tile size based on the count of businesses",
+       caption = "Source: Data.gov.fr     25/11/2020      Yaswanthkumar.G")
+```
+
+Clothing and Eating Businesses hold a sizeable chunk in the City. Also, we find how Boulangeries fit into french economy. Let us delve into each of these categories separately to understand a bit more.
+
+### Eating Businesses
+```{r echo= FALSE,message=FALSE,warning=FALSE}
+eatrennes<-rennesovrt[rennesovrt$category=='eat',]
+
+eatrennes%>%group_by(subcategory,status)%>%summarise(count=n())%>%ggplot(aes(x=subcategory,y=count,fill=status))+geom_bar(stat="identity",color = "grey40", alpha = .5)+coord_flip()+
+  labs(title = "Distribution of eating Businesses status by subcategory",
+       subtitle = "pizza vending machines are open and even some bars too,\n but bars that are open also have tabac",
+       caption = "Source: Data.gov.fr      25/11/2020      Yaswanthkumar.G")
+
+```
+
+Some fast food centers have either adapted or else opened partially. Let us delve into partially opened fast food centers as there are lot more of them.
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+eatrennes[eatrennes$subcategory=='fast_food'& eatrennes$status=='partial',]%>%group_by(name)%>%summarise(count=n())%>% 
+  ggplot(aes(x=name,y=count))+geom_bar(stat="identity",fill = "dodgerblue", color = "grey40", alpha = .5)+coord_flip()+
+  labs(title = "Fast Food businesses that are partially opened",
+       subtitle = "Most of the Fast Food businesses that are partially opened\n are big brands",
+       caption = "Source: Data.gov.fr      25/11/2020      Yaswanthkumar.G")
+```
+
+Big Brands seems adapting faster to the pandemic than individual fast food eateries.
+
+### Food Businesses
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+foodrennes<-rennesovrt[rennesovrt$category=='food',]
+
+foodrennes%>%group_by(subcategory,status)%>%summarise(count=n())%>%ggplot(aes(x=subcategory,y=count,fill=status))+geom_bar(stat="identity",color = "grey40", alpha = .5)+coord_flip()+
+  labs(title = "Distribution of food Business status by Category",
+       subtitle = "chocolate, confectionary, tea, coffee products selling shops\n are either closed or status unknown, some bakeries\n are closed, and most of the super markets are open",
+       caption = "Source: Data.gov.fr      25/11/2020      Yaswanthkumar.G")
+```
+
+No closed supermarket chains. wow! This seems the reason behind closing the non-essential aisles in the second confinement to reduce the unfair advantage supermarket chains have. Bravo France!
+
+### Amenity Businesses
+
+There are a large number of closures in Amenity Businesses. Let us delve into those closures,
+
+```{r echo=FALSE,message=FALSE, warning=FALSE}
+amenityrennes<-rennesovrt[rennesovrt$category=='amenity',]
+
+amenityrennes[amenityrennes$status=='closed',]%>%group_by(subcategory)%>%summarise(count=n())%>%ggplot(aes(x=subcategory,y=count))+
+  geom_bar(stat="identity",fill = "dodgerblue", color = "grey40", alpha = .5)+coord_flip()+
+  labs(title = "Amenity businesses that are closed",
+       subtitle = "Most of the Banks and Insurance companies closed their branches\n and moved online",
+       caption = "Source: Data.gov.fr      25/11/2020      Yaswanthkumar.G")
+```
+
+These are the interesting insights I found from the open data published. You can find the code on [my Github](https://github.com/yaswanthkumargothi/covid_economy_viz) if you wanted to extract insights for other regions in France.
+
+I hope you find this article interesting! I am open to comments and suggestions. Please feel free to like and comment.
+
+
+[1]: https://www.data.gouv.fr/fr
+[2]: https://www.data.gouv.fr/fr/organizations/region-bretagne-1
+[3]: https://www.data.gouv.fr/fr/datasets/commerces-ouverts-pendant-le-confinement-en-france-metropolitaine
+
+
+

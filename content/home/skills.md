@@ -20,14 +20,26 @@ feature:
   icon: r-project
   icon_pack: fab
   name: R
-- description: 100%
+- description: 90%
+  icon: python
+  icon_pack: fab
+  name: Python
+- description: 80%
+  icon: database
+  icon_pack: fas
+  name: Database
+- description: 90%
   icon: chart-line
   icon_pack: fas
   name: Statistics
-- description: 10%
-  icon: camera-retro
+- description: 90%
+  icon: laptop-code
   icon_pack: fas
-  name: Photography
+  name: Artificial Intelligence
+- description: 100%
+  icon: biking
+  icon_pack: fas
+  name: Biking
 
 # Uncomment to use emoji icons.
 #- icon = ":smile:"

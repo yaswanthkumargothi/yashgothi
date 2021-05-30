@@ -23,29 +23,29 @@ date_format: Jan 2006
 #   Leave other parameters empty if not required.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 item:
-- certificate_url: https://www.coursera.org
-  date_end: ""
-  date_start: "2021-01-25"
-  description: ""
-  organization: Coursera
-  organization_url: https://www.coursera.org
-  title: Neural Networks and Deep Learning
-  url: ""
-- certificate_url: https://www.edx.org
+- certificate_url: https://bit.ly/31kPycD
+  date_end: "2023-12-31"
+  date_start: "2020-12-31"
+  description: "Tensorflow Developer Certificate"
+  organization: Tensorflow
+  organization_url: https://www.Tensorflow.org
+  title: Tensorflow Developer Certification
+  url: "https://www.tensorflow.org/certificate"
+- certificate_url: https://bit.ly/31qpYmx
   date_end: ""
   date_start: "2021-01-01"
-  description: Formulated informed blockchain models, hypotheses, and use cases.
-  organization: edX
-  organization_url: https://www.edx.org
-  title: Blockchain Fundamentals
-  url: https://www.edx.org/professional-certificate/uc-berkeleyx-blockchain-fundamentals
-- certificate_url: https://www.datacamp.com
-  date_end: "2020-12-21"
-  date_start: "2020-07-01"
+  description: Dataiku DSS Workflow, Visual Analysis, Core Concepts 
+  organization: Dataiku
+  organization_url: https://dataiku.com/
+  title: Dataiku Core Designer Certificate
+  url: https://academy.dataiku.com/path/core-designer
+- certificate_url: https://www.insofe.edu.in/
+  date_end: ""
+  date_start: "2018-12-30"
   description: ""
-  organization: DataCamp
-  organization_url: https://www.datacamp.com
-  title: 'Object-Oriented Programming in R'
+  organization: INSOFE, Hyderabad
+  organization_url: https://www.insofe.edu.in/
+  title: 'PGP in Big Data Analytics and Optimization'
   url: ""
 
 design:
