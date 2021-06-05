@@ -17,13 +17,13 @@ height = "325px"
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
   title = ""
-  content = "\"He has a very solid knowledge of artificial intelligence that he supplements as necessary by carrying out the necessary research. - A HoD at a Research Establishment \""
+  content = "\"He has a very solid knowledge of artificial intelligence that he supplements as necessary by carrying out the necessary research. - HoD at a Research Establishment \""
   align = "center"  # Choose `center`, `left`, or `right`.
 
   # Overlay a color or image (optional).
   #   Deactivate an option by commenting out the line, prefixing it with `#`.
   overlay_color = "#404040"  # An HTML color value.
-  overlay_img = "headers/pomegranate.jpg"  # Image path relative to your `static/img/` folder.
+  overlay_img = "headers/daisy-2.jpg"  # Image path relative to your `static/img/` folder.
   overlay_filter = 0.4  # Darken the image. Value in range 0-1.
 
   # Call to action button (optional).
@@ -36,11 +36,11 @@ height = "325px"
     
 [[item]]
   title = ""
-  content = "\"Yaswanthkumar is extremely serious and high skilled data scientist.- A Researcher and Dean \""
+  content = "\"Yaswanthkumar is extremely serious and high skilled data scientist.- Researcher and Dean \""
   align = "center"
 
   overlay_color = "#404040"  # An HTML color value.
-  overlay_img = "headers/birds.jpg"  # Image path relative to your `static/img/` folder.
+  overlay_img = "headers/birds-1.jpg"  # Image path relative to your `static/img/` folder.
   overlay_filter = 0.5  # Darken the image. Value in range 0-1.
 
   cta_label = "see my projects"
@@ -50,7 +50,7 @@ height = "325px"
   
 [[item]]
   title = ""
-  content = "\"He masters the concepts and tools and is able to adapt to a new context! - a Manager at IFSTTAR\""
+  content = "\"He masters the concepts and tools and is able to adapt to a new context! - Manager at IFSTTAR\""
   align = "left"
 
   overlay_color = "#404040"  # An HTML color value.
@@ -65,7 +65,7 @@ height = "325px"
   
 [[item]]
   title = ""
-  content = "\"Yaswanth is autonomous and independent. - A Team Member\""
+  content = "\"Yaswanth is autonomous and independent. - Professor at RSB\""
   align = "center"
 
   overlay_color = "#404040"  # An HTML color value.
@@ -79,11 +79,11 @@ height = "325px"
   
 [[item]]
   title = ""
-  content = "\"He is very committed to the deadlines, and the quality of his job is undoubtedly excellent. - A Top Consultant\""
+  content = "\"He is very committed to the deadlines, and the quality of his job is undoubtedly excellent. - Consultant at Nike\""
   align = "left"
 
   overlay_color = "#404040"  # An HTML color value.
-  overlay_img = "headers/birds.jpg"  # Image path relative to your `static/img/` folder.
+  overlay_img = "headers/birds-1.jpg"  # Image path relative to your `static/img/` folder.
   overlay_filter = 0.4  # Darken the image. Value in range 0-1.
 
   cta_label = "see my projects"
