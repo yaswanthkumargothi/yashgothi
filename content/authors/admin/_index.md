@@ -1,6 +1,5 @@
 ---
-bio: My research interests include Applied Data Science, Casual Inference and Data Analytics
-  matter.
+bio: My research interests include Applied Data Science, Casual Inference, and Data Analytics
 education:
   courses:
   - course: MSc in Data and Business Analytics
