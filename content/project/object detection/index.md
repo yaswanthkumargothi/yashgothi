@@ -26,4 +26,4 @@ You only look once (YOLO) is a state-of-the-art, real-time object detection syst
 
 The official [DarkNet](https://github.com/pjreddie/darknet) repository is tuned for the custom Barcode detection on text books. 
 
-I encourage you to look at the **Github** Project page. For Github link, Click on the button above!
+I encourage you to look at the **Github** Project page. For Github link, Click on the button above!!
